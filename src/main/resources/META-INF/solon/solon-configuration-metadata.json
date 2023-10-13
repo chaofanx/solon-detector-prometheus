@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "name": "solon.detector.prometheus.endpoint",
+      "type": "java.lang.String",
+      "defaultValue": "/metrics",
+      "description": "指标端点"
+    },
+    {
+      "name": "solon.detector.prometheus.tag",
+      "type": "java.util.Map",
+      "defaultValue": "{}",
+      "description": "自定义标签"
+    }
+  ]
+}
