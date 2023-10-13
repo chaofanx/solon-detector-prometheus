@@ -1,6 +1,6 @@
 # Solon Detector Prometheus
 
-Solon Detector Prometheus 是一个基于 [Solon] 框架的 Prometheus 监控插件。
+Solon Detector Prometheus 是一个基于 [Solon] 框架的 Prometheus 监控插件，借助 [Micrometer](https://micrometer.io/) 实现，减少在 Solon 中的配置。
 
 允许将 Solon 应用程序的监控数据，导出到 Prometheus 端点。
 
@@ -26,6 +26,12 @@ implementation 'xyz.chaofan.solon:solon.detector.prometheus:1.0.0'
 ## 使用
 
 应用程序启动后，访问 `/metrics` 即可查看监控数据。
+
+## 配置
+
+```yaml
+solon.detector.prometheus.endpoint: /metrics  # 自定义端点，默认为 /metrics
+```
 
 ## 示例：自定义指标
 

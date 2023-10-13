@@ -3,6 +3,7 @@ package xyz.chaofan.solon;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
+import xyz.chaofan.solon.integration.JvmInfo;
 
 public class SolonMeterRegistry {
   public static final PrometheusMeterRegistry GLOBAL_METER_REGISTRY = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
@@ -11,5 +12,11 @@ public class SolonMeterRegistry {
 
   public static void init() {
     Counter.builder("application.start.time").description("Application start time").register(GLOBAL_METER_REGISTRY).increment(applicationStartTime);
+    doScrape(new JvmInfo());
   }
+
+  private static void doScrape(Monitor monitor) {
+    monitor.scrape(GLOBAL_METER_REGISTRY);
+  }
+
 }
