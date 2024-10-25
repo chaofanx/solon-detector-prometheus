@@ -1,11 +1,9 @@
 plugins {
     id 'java-library'
-    id 'maven-publish'
-    id 'signing'
 }
 
 group = 'xyz.chaofan.solon'
-version = '1.0.0'
+version = '1.0.1'
 description = 'solon-detector-prometheus is a Prometheus monitoring plug-in based on the Solon framework.'
 
 repositories {
@@ -13,10 +11,9 @@ repositories {
 }
 
 dependencies {
-    implementation platform('org.noear:solon-parent:2.5.8')
-    implementation 'org.noear:solon'
-    implementation 'org.slf4j:slf4j-api'
-    implementation 'io.micrometer:micrometer-registry-prometheus:1.11.5'
+    implementation 'org.noear:solon:3.0.2'
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.13.6'
 }
 
 
@@ -34,53 +31,4 @@ javadoc {
     if (JavaVersion.current().isJava9Compatible()) {
         options.addBooleanOption('html5', true)
     }
-}
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'solon-detector-prometheus'
-            from components.java
-            pom {
-                name = project.name
-                description = description
-                url = 'https://github.com/chaofanx/solon-detector-prometheus'
-                licenses {
-                    license {
-                        name = 'Apache License, Version 2.0'
-                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'chaofanx'
-                        name = 'chaofanx'
-                        email = '915669640@qq.com'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git://github.com/chaofanx/solon-detector-prometheus'
-                    developerConnection = 'scm:git:ssh://github.com/chaofanx/solon-detector-prometheus.git'
-                    url = 'https://github.com/chaofanx/solon-detector-prometheus'
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            name = "OSSRH"
-            if (project.version.toString().endsWith("-SNAPSHOT")) {
-                url = "https://s01.oss.sonatype.org/content/repositories/snapshots"
-            } else {
-                url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            }
-            credentials {
-                username = findProperty("ossrhUsername") ?: System.getenv("OSSRH_USERNAME")
-                password = findProperty("ossrhPassword") ?: System.getenv("OSSRH_PASSWORD")
-            }
-        }
-    }
-}
-
-signing {
-    sign(publishing.publications.mavenJava)
 }

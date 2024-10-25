@@ -1,12 +1,13 @@
 package xyz.chaofan.solon;
 
 import io.micrometer.core.instrument.Counter;
-import io.micrometer.prometheus.PrometheusConfig;
-import io.micrometer.prometheus.PrometheusMeterRegistry;
+import io.micrometer.prometheusmetrics.PrometheusConfig;
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
 import xyz.chaofan.solon.integration.JvmInfo;
 
 public class SolonMeterRegistry {
-  public static final PrometheusMeterRegistry GLOBAL_METER_REGISTRY = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+  public static final PrometheusMeterRegistry GLOBAL_METER_REGISTRY = new PrometheusMeterRegistry(
+      PrometheusConfig.DEFAULT);
 
   public static long applicationStartTime = 0;
 
